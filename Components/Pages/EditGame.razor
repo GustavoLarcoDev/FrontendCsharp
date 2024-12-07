@@ -1,0 +1,62 @@
+﻿@page "/editgame"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit Game</PageTitle>
+<h3>New Game</h3>
+@if(genres is null)
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+<div class="row">
+    <div class="col-md-4">
+<EditForm Model="@game" FormName="editGame" OnSubmit="HandleSubmit">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name:</label>
+    <InputText id="name" @bind-Value="game.Name" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label for="genre" class="form-label">Genre:</label>
+    <InputSelect id="Genre" @bind-Value="game.GenreId" class="form-select">
+    <option Value="">select add genre </option>
+    @foreach (var genre in genres)
+    {
+        <option Value = "@genre.Id">@genre.Name</option>
+    }
+    </InputSelect>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price:</label>
+    <InputNumber id="price" @bind-Value="game.Price" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label for="releaseDate" class="form-label">Release Date:</label>
+    <InputDate id="releaseDate" @bind-Value="game.ReleaseDate" class="form-control" />
+  </div>
+  <button type ="submit" class="btn btn-primary">Save</button>
+  <a role ="button" class="btn btn-secondary" href="/">Cancel</a>
+</EditForm>
+    </div>
+</div>
+}
+@code {
+    private GameDetails game {get; set;} = new()
+    {
+        Name = string.Empty,
+        ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow)
+    };
+    private GenresClients genresClients = new();
+    private GamesClients gamesClients = new();
+    private Genre[]? genres;
+
+    protected override void OnInitialized()
+    {
+        genres = genresClients.GetGenres();
+    }
+    private void HandleSubmit()
+    {
+        gamesClients.AddGame(game);
+        NavigationManager.NavigateTo("/");
+    }
+}
