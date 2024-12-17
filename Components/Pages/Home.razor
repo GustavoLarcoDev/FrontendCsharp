@@ -1,5 +1,7 @@
 ﻿@page "/"
+@inject GamesClients client
 <PageTitle>Game Catalog</PageTitle>
+
 
 <div class="mt-2">
     <a class="btn btn-primary" role ="button" href="/editgame">New Game</a>
@@ -33,13 +35,13 @@ else {
 </table>
 }
 @code {
-    private GamesClients clients = new();
+
 
     private GameSummary[]? games;
 
     protected override void OnInitialized()
     {
-        games = clients.GetGames();
+        games = client.GetGames();
     }
 
 }

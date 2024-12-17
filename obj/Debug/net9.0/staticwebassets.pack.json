@@ -1,31 +1,31 @@
 {
   "Files": [
     {
-      "Id": "/Users/gustavolarco/GameStore/GameStore.FrontEnd/obj/Debug/net9.0/scopedcss/projectbundle/GameStore.FrontEnd.bundle.scp.css",
-      "PackagePath": "staticwebassets/GameStore.FrontEnd.prqy8byi7j.bundle.scp.css"
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Frontend\\FrontendCsharp\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\GameStore.FrontEnd.bundle.scp.css",
+      "PackagePath": "staticwebassets\\GameStore.FrontEnd.9mxob9onp6.bundle.scp.css"
     },
     {
-      "Id": "/Users/gustavolarco/GameStore/GameStore.FrontEnd/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "C:\\Users\\Gustavo\\Desktop\\Frontend\\FrontendCsharp\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.GameStore.FrontEnd.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameStore.FrontEnd.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.GameStore.FrontEnd.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameStore.FrontEnd.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.GameStore.FrontEnd.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.GameStore.FrontEnd.props",
       "PackagePath": "build\\GameStore.FrontEnd.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.GameStore.FrontEnd.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.GameStore.FrontEnd.props",
       "PackagePath": "buildMultiTargeting\\GameStore.FrontEnd.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.GameStore.FrontEnd.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.GameStore.FrontEnd.props",
       "PackagePath": "buildTransitive\\GameStore.FrontEnd.props"
     }
   ],

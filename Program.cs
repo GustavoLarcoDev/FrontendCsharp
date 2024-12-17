@@ -1,9 +1,12 @@
+using GameStore.FrontEnd.Clients;
 using GameStore.FrontEnd.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+builder.Services.AddSingleton<GamesClients>();
+builder.Services.AddSingleton<GenresClients>();
 
 var app = builder.Build();
 

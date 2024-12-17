@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="../build/GameStore.FrontEnd.props" />
+  <Import Project="..\build\GameStore.FrontEnd.props" />
 </Project>

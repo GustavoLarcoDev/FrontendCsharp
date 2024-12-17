@@ -1,62 +1,96 @@
 ﻿@page "/editgame"
+@page "/editgame/{Id:int}"
 @inject NavigationManager NavigationManager
+@inject GamesClients GamesClients
+@inject GenresClients GenresClients
 
 <PageTitle>Edit Game</PageTitle>
-<h3>New Game</h3>
-@if(genres is null)
+<h3>Edit Game</h3>
+@if (genres is null || game is null)
 {
-    <p><em>Loading....</em></p>
+    <p><em>Loading...</em></p>
 }
 else
 {
-<div class="row">
-    <div class="col-md-4">
-<EditForm Model="@game" FormName="editGame" OnSubmit="HandleSubmit">
-  <div class="mb-3">
-    <label for="name" class="form-label">Name:</label>
-    <InputText id="name" @bind-Value="game.Name" class="form-control" />
-  </div>
-  <div class="mb-3">
-    <label for="genre" class="form-label">Genre:</label>
-    <InputSelect id="Genre" @bind-Value="game.GenreId" class="form-select">
-    <option Value="">select add genre </option>
-    @foreach (var genre in genres)
-    {
-        <option Value = "@genre.Id">@genre.Name</option>
-    }
-    </InputSelect>
-  </div>
-  <div class="mb-3">
-    <label for="price" class="form-label">Price:</label>
-    <InputNumber id="price" @bind-Value="game.Price" class="form-control" />
-  </div>
-  <div class="mb-3">
-    <label for="releaseDate" class="form-label">Release Date:</label>
-    <InputDate id="releaseDate" @bind-Value="game.ReleaseDate" class="form-control" />
-  </div>
-  <button type ="submit" class="btn btn-primary">Save</button>
-  <a role ="button" class="btn btn-secondary" href="/">Cancel</a>
-</EditForm>
+    <div class="row">
+        <div class="col-md-6">
+            <EditForm Model="@game" OnValidSubmit="HandleSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <InputText id="name" @bind-Value="game.Name" class="form-control" />
+                    <ValidationMessage For="() => game.Name" />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Genre:</label>
+                    <InputSelect id="genre" @bind-Value="game.GenreId" class="form-select">
+                        <option value="">-- Select Genre --</option>
+                        @foreach (var genre in genres)
+                        {
+                            <option value="@genre.Id">@genre.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="() => game.GenreId" />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price:</label>
+                    <InputNumber id="price" @bind-Value="game.Price" class="form-control" />
+                    <ValidationMessage For="() => game.Price" />
+                </div>
+                
+                <div class="mb-3">
+                    <label for="releaseDate" class="form-label">Release Date:</label>
+                    <InputDate id="releaseDate" @bind-Value="game.ReleaseDate" class="form-control" />
+                    <ValidationMessage For="() => game.ReleaseDate" />
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="NavigateToHome">Cancel</button>
+            </EditForm>
+        </div>
     </div>
-</div>
 }
 @code {
-    private GameDetails game {get; set;} = new()
-    {
-        Name = string.Empty,
-        ReleaseDate = DateOnly.FromDateTime(DateTime.UtcNow)
-    };
-    private GenresClients genresClients = new();
-    private GamesClients gamesClients = new();
+    [Parameter]
+    public int? Id { get; set; }
+
+    private GameDetails? game { get; set; }
     private Genre[]? genres;
 
     protected override void OnInitialized()
     {
-        genres = genresClients.GetGenres();
+        genres = GenresClients.GetGenres();
+        if (Id.HasValue)
+        {
+            game = GamesClients.GetGame(Id.Value);
+        }
+        else
+        {
+            game = new GameDetails
+            {
+                Name = string.Empty,
+                ReleaseDate = DateTime.Now,
+                Price = 0M,
+                GenreId = string.Empty
+            };
+        }
     }
+
     private void HandleSubmit()
     {
-        gamesClients.AddGame(game);
+        if (game is not null)
+        {
+            GamesClients.AddGame(game);
+            NavigationManager.NavigateTo("/");
+        }
+    }
+
+    private void NavigateToHome()
+    {
         NavigationManager.NavigateTo("/");
     }
 }
